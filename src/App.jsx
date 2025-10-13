@@ -1,20 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css';
-import Home from './pages/Home.jsx';
-import Header from './pages/components/header.jsx';
-import Footer from './pages/components/Footer.jsx';
+import Home from "./pages/Home.jsx";
+import ConsultancyForm from "./pages/ConsultancyForm.jsx";
+import Header from "./pages/components/Header.jsx";
+import Footer from "./pages/components/Footer.jsx";
+import Sidebar from "./pages/components/Sidebar.jsx";
+import "./App.css";
 
 function App() {
-  
   return (
     <BrowserRouter>
-    <Header />
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
-    <Footer />
+      <div className="flex h-screen bg-[#F8FAFC]">
+        <Sidebar />
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <Header />
+          <main className="flex-1 overflow-y-auto p-6">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/consultancy" element={<ConsultancyForm />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </div>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

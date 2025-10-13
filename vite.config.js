@@ -15,11 +15,4 @@ export default defineConfig({
       },
     },
   },
-  css: {
-    preprocessorOptions: {
-      css: {
-        additionalData: `@import "./src/styles/global.css";`, // Ensure Tailwind has access
-      },
-    },
-  },
 });
