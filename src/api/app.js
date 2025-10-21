@@ -13,6 +13,12 @@ app.use(cors());
 app.use(express.json());
 app.use(logger);
 
+// 🔹 Parse JSON bodies
+app.use(express.json());
+
+// 🔹 Optional: Parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
+
 // All routes
 app.use("/api", routes);
 

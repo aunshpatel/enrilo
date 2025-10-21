@@ -1,12 +1,10 @@
 import express from "express";
 import healthRoutes from "./healthRoutes.js";
+import userRoutes from "./userRoutes.js";
 
 const router = express.Router();
 
 router.use("/health", healthRoutes);
-
-// You can later add more modules like:
-// router.use("/users", userRoutes);
-// router.use("/deals", dealRoutes);
+router.use("/user", userRoutes);
 
 export default router;
