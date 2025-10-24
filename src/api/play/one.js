@@ -9,9 +9,9 @@ import bcrypt from "bcrypt";
         const hashedPassword = await hashPassword(password);
 
         const sampleUser = {
-            full_name: "Soebahmed Shaikh",
-            email: "soeb2398@gmail.com",
-            phone_number: "8320336901",
+            full_name: "Tabrez Shaikh",
+            email: "tbz@gmail.com",
+            phone_number: "8320336902",
             country_code: "+91",
             password: hashedPassword, // usually hashed in production
             role: "counsellor",
@@ -45,7 +45,6 @@ import bcrypt from "bcrypt";
             },
             notes: "Excellent counsellor with strong student follow-up record.",
         };
-
 
         console.log(sampleUser);
         const user = new User(sampleUser);

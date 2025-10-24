@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
     // Basic Identity
     full_name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    phone_number: { type: String, required: true, unique: true },
+    phone_number: { type: String, required: true },
     country_code: { type: String },
     photo: { type: String, default: "" },
 

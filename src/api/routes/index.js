@@ -5,6 +5,6 @@ import userRoutes from "./userRoutes.js";
 const router = express.Router();
 
 router.use("/health", healthRoutes);
-router.use("/user", userRoutes);
+router.use("/users", userRoutes);
 
 export default router;
