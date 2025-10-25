@@ -6,39 +6,33 @@ import Joi from "joi";
 // ✅ Joi Validation Schema
 const userSchema = Joi.object({
     full_name: Joi.string().min(3).required(),
-    email: Joi.string().email().required(),
-    phone_number: Joi.string().min(7).max(15).required(),
-    country_code: Joi.string().required(),
+    company_email: Joi.string().email().required(),    // user's company alloted email id (personal if no company email id exists)
     password: Joi.string().min(6).required(),
-    role: Joi.string().required(),
-    position: Joi.string().allow(""),
-    company_name: Joi.string().allow(""),
-    company_email: Joi.string().email().allow(""),
-    company_address: Joi.string().allow(""),
-    branch: Joi.string().allow(""),
+    country_code: Joi.string().required(),
+    phone_number: Joi.number().min(7).max(15).required(),
+    photo: Joi.string().allow(""),
+    position: Joi.string().allow(""),           // ceo/hr/etc
     home_address: Joi.string().allow(""),
-    date_of_birth: Joi.date().optional(),
-    gender: Joi.string().valid("Male", "Female", "Other").optional(),
-    emergency_contact: Joi.object({
+    date_of_birth: Joi.date().required(),
+    gender: Joi.string().valid("Male", "Female", "Other").required(),
+     emergency_contact: Joi.object({
         name: Joi.string().required(),
         relation: Joi.string().required(),
         country_code: Joi.string().required(),
         phone_number: Joi.string().required(),
     }).required(),
+    role: Joi.string().required(),  // user/admin
+    company_name: Joi.string().allow(""),
+    company_address: Joi.string().allow(""),
+    branch: Joi.string().allow(""),
+   
     documents: Joi.object({
-        aadhar_card: Joi.object({
-            number: Joi.string().required(),
-            file: Joi.string().uri().required(),
-        }).required(),
-        pan_card: Joi.object({
-            number: Joi.string().required(),
-            file: Joi.string().uri().required(),
-        }).required(),
-        passport: Joi.object({
-            number: Joi.string().required(),
-            file: Joi.string().uri().required(),
-        }).required(),
+        aadhar_card_photo_url: Joi.string().required(),
+        aadhar_card: Joi.number().required(),
+        pan_card_photo_url: Joi.string().required(),
+        pan_card: Joi.string().required(),
     }).required(),
+    admin_of_branch: Joi.array().allow([]),
     notes: Joi.string().allow(""),
 });
 
