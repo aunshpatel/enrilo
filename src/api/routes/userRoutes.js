@@ -7,13 +7,19 @@ import { getUserByIdController } from "../controllers/user/getUserByIdController
 import { deleteUserByIdController } from "../controllers/user/deleteUserByIdController.js";
 import { updateUserController } from "../controllers/user/updateUserController.js";
 
-const router = express.Router();
-router.post("/login", userLoginController);
-router.post("/", createUserController);
-router.get("/", getUsersController);
-router.get("/:id", getUserByIdController);
-router.delete("/:id", deleteUserByIdController);
-router.put("/:id", updateUserController);
+const userRoutes = express.Router();
 
-export default router;
+userRoutes.post("/login", userLoginController);
+
+userRoutes.post("/", createUserController);
+
+userRoutes.get("/", getUsersController);
+
+userRoutes.get("/:id", getUserByIdController);
+
+userRoutes.delete("/:id", deleteUserByIdController);
+
+userRoutes.put("/:id", updateUserController);
+
+export default userRoutes;
 
