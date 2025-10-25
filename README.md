@@ -1,5 +1,4 @@
 # Enrilo
-
 This project is a web application for Student Consultancy Management website.
 
 ## To run the project, type the following commands in order:
