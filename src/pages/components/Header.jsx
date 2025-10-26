@@ -6,7 +6,7 @@ export default function Header() {
   // Dynamic title map
   const titleMap = {
     "/dashboard": "Dashboard",
-    "/consultancy": "Add Consultancy",
+    "/add-new-consultancy": "Add New Consultancy",
     "/consultancy/all": "All Consultancies",
     "/consultancy/payments": "All Payment Details",
     "/superadmin/add": "Add Super Admin",
@@ -16,10 +16,9 @@ export default function Header() {
     "/company/profile": "Company Profile",
     "/company/gst": "GST Collection",
     "/settings": "Settings",
-    "/signout": "Sign Out",
   };
 
-  const currentTitle = titleMap[location.pathname] || "SSMS Dashboard";
+  const currentTitle = titleMap[location.pathname] || "Enrilo Dashboard";
 
   return (
     <header className="bg-white shadow p-4 flex items-center">

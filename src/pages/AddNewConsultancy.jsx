@@ -1,39 +1,206 @@
-// src/pages/ConsultancyForm.jsx
+// import { useState } from "react";
+// export default function AddNewConsultancy() {
+//   const [selectedOfficeType, setSelectedOfficeType] = useState('Head Office');
+
+//   return (
+//     <div className="p-4">
+//       <div className="bg-white rounded-2xl shadow p-6 max-w-5xl mx-auto">
+//         <button className="bg-[#FACC15] text-gray-900 font-semibold px-5 py-2 rounded-md mb-6 hover:bg-[#EAB308] transition">
+//           Add New Consultancy
+//         </button>
+
+//         {/* Logo Upload Area */}
+//         <div className="flex flex-col items-center border-dashed border-2 border-gray-300 rounded-lg p-8 mb-8">
+//           <div className="text-gray-400 text-3xl mb-2">🖼️</div>
+//           <p className="text-sm text-gray-600">Click Here To Add Logo</p>
+//         </div>
+
+//         {/* Form Inputs */}
+//         <form className="grid grid-cols-1 md:grid-cols-3 gap-4">
+//           <input type="text" placeholder="Consultancy Name" className="input" id="consultancy_name"/>
+//           <input type="text" placeholder="GST Number" className="input" id="gst_number" />
+//           <input type="text" placeholder="Website" className="input" id="website" />
+
+//           <input type="text" placeholder="LinkedIn" className="input" id="linkedin_url" />
+//           <input type="text" placeholder="Facebook" className="input" id="facebook_url" />
+//           <input type="text" placeholder="Instagram" className="input" id="instagram_url"/>
+          
+//           <p className="text-sm text-gray-600">Offices</p>
+
+//           <div className="flex flex-row justify-evenly">
+//             <input type="radio" id="single_branch" />
+//             <p className="text-sm text-gray-600">Single Branch</p>
+//           </div>
+
+//           <div className="flex flex-row justify-evenly">
+//             <input type="radio" id="multiple+branches"/>
+//             <p className="text-sm text-gray-600">Multiple Branches</p>
+//           </div>
+          
+//           <input type="text" placeholder="Office City" className="input" id="office_city" />
+          
+//           <input type="text" placeholder="Office Address" className="input" id="office_type"/>
+          
+//           <select value={selectedOfficeType} id="office_type" className="input">
+//             <option value="Head Office">Head Office</option>
+//             <option value="Branch">Branch</option>
+//             <option value="Franchise">Franchise</option>
+//           </select>
+//         </form>
+
+//         <div className="mt-8 flex justify-center">
+//           <button className="bg-[#1E293B] text-white px-8 py-2 rounded-md hover:bg-[#334155] transition">
+//             Save Details
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+import { useState } from "react";
+
 export default function AddNewConsultancy() {
+  const [branchType, setBranchType] = useState("single"); // "single" or "multiple"
+  const [offices, setOffices] = useState([
+    {
+      city: "",
+      address: "",
+      type: "Head Office",
+      countryCode: "",
+      phoneNumber: "",
+    },
+  ]);
+
+  const handleOfficeChange = (index, field, value) => {
+    const updated = [...offices];
+    updated[index][field] = value;
+    setOffices(updated);
+  };
+
+  const handleAddOffice = () => {
+    setOffices([
+      ...offices,
+      {
+        city: "",
+        address: "",
+        type: "Branch",
+        countryCode: "",
+        phoneNumber: "",
+      },
+    ]);
+  };
+
+  const handleRemoveOffice = (index) => {
+    setOffices(offices.filter((_, i) => i !== index));
+  };
+
+  const handleBranchTypeChange = (type) => {
+    setBranchType(type);
+    if (type === "single") {
+      setOffices([
+        {
+          city: "",
+          address: "",
+          type: "Head Office",
+          countryCode: "",
+          phoneNumber: "",
+        },
+      ]);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const payload = {};
+    offices.forEach((office, index) => {
+      const num = index + 1;
+      payload[`office_city_${num}`] = office.city;
+      payload[`office_address_${num}`] = office.address;
+      payload[`office_type_${num}`] = office.type;
+      payload[`office_country_code_${num}`] = office.countryCode;
+      payload[`office_phone_number_${num}`] = office.phoneNumber;
+    });
+    console.log("Database Payload:", payload);
+    // TODO: send `payload` to backend or database
+  };
+
   return (
     <div className="p-4">
-      <div className="bg-white rounded-2xl shadow p-6 max-w-5xl mx-auto">
+      <div className="bg-white rounded-2xl shadow p-6 max-w-6xl mx-auto">
         <button className="bg-[#FACC15] text-gray-900 font-semibold px-5 py-2 rounded-md mb-6 hover:bg-[#EAB308] transition">
           Add New Consultancy
         </button>
 
-        {/* Logo Upload Area */}
+        {/* Logo Upload */}
         <div className="flex flex-col items-center border-dashed border-2 border-gray-300 rounded-lg p-8 mb-8">
           <div className="text-gray-400 text-3xl mb-2">🖼️</div>
           <p className="text-sm text-gray-600">Click Here To Add Logo</p>
         </div>
 
-        {/* Form Inputs */}
-        <form className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <input type="text" placeholder="Consultancy Name" className="input" />
-          <input type="text" placeholder="GST Number" className="input" />
-          <input type="text" placeholder="Website" className="input" />
+        {/* Form */}
+        <form className="grid grid-cols-1 md:grid-cols-3 gap-4" onSubmit={handleSubmit}>
+          <input type="text" placeholder="Consultancy Name" className="input" id="consultancy_name" />
+          <input type="text" placeholder="GST Number" className="input" id="gst_number" />
+          <input type="text" placeholder="Website" className="input" id="website" />
 
-          <input type="text" placeholder="LinkedIn" className="input" />
-          <input type="text" placeholder="Facebook" className="input" />
-          <input type="text" placeholder="Instagram" className="input" />
+          <input type="text" placeholder="LinkedIn" className="input" id="linkedin_url" />
+          <input type="text" placeholder="Facebook" className="input" id="facebook_url" />
+          <input type="text" placeholder="Instagram" className="input" id="instagram_url" />
 
-          <input type="text" placeholder="Office City" className="input" />
-          <input type="text" placeholder="Office Address" className="input" />
-          <select className="input">
-            <option>Head Office</option>
-            <option>Branch</option>
-            <option>Franchise</option>
-          </select>
+          {/* Office Selection */}
+          <div className="col-span-3 mt-6">
+            <p className="text-sm text-gray-600 mb-2">Offices</p>
+            <div className="flex gap-8 mb-4">
+              <label className="flex items-center gap-2">
+                <input type="radio" name="branch_type" checked={branchType === "single"} onChange={() => handleBranchTypeChange("single")} className="accent-[#1E293B]" />
+                <span className="text-sm text-gray-700">Single Branch</span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input type="radio" name="branch_type" checked={branchType === "multiple"} onChange={() => handleBranchTypeChange("multiple")} className="accent-[#1E293B]" />
+                <span className="text-sm text-gray-700">Multiple Branches</span>
+              </label>
+            </div>
+
+            {/* Office Details (no decoration) */}
+            {offices.map((office, index) => (
+              <div key={index} className="grid grid-cols-1 md:grid-cols-6 gap-4 items-center mb-3">
+                <input type="text" placeholder="Office City" className="input" value={office.city} onChange={(e) => handleOfficeChange(index, "city", e.target.value)} />
+
+                <input type="text" placeholder="Office Address" className="input" value={office.address} onChange={(e) => handleOfficeChange(index, "address", e.target.value)} />
+                
+                <select className="input" value={office.type} onChange={(e) => handleOfficeChange(index, "type", e.target.value)} >
+                  <option value="Head Office">Head Office</option>
+                  <option value="Branch">Branch</option>
+                  <option value="Franchise">Franchise</option>
+                </select>
+
+                <input type="text" placeholder="Country Code (e.g. +1)" className="input" value={office.countryCode} onChange={(e) => handleOfficeChange(index, "countryCode", e.target.value)} />
+
+                <input type="text" placeholder="Phone Number" className="input" value={office.phoneNumber} onChange={(e) => handleOfficeChange(index, "phoneNumber", e.target.value)} />
+
+                {branchType === "multiple" && (
+                  <button type="button" onClick={() => handleRemoveOffice(index)} className="text-red-600 hover:text-red-800 text-sm font-semibold" >
+                    ❌ Remove
+                  </button>
+                )}
+              </div>
+            ))}
+
+            {/* Add Office Button */}
+            {branchType === "multiple" && (
+              <div className="mt-2">
+                <button type="button" onClick={handleAddOffice} className="bg-[#1E293B] text-white px-4 py-2 rounded-md hover:bg-[#334155] transition" >
+                  + Add Another Office
+                </button>
+              </div>
+            )}
+          </div>
         </form>
 
+        {/* Save Button */}
         <div className="mt-8 flex justify-center">
-          <button className="bg-[#1E293B] text-white px-8 py-2 rounded-md hover:bg-[#334155] transition">
+          <button type="submit" onClick={handleSubmit} className="bg-[#1E293B] text-white px-8 py-2 rounded-md hover:bg-[#334155] transition" >
             Save Details
           </button>
         </div>
@@ -41,3 +208,4 @@ export default function AddNewConsultancy() {
     </div>
   );
 }
+
