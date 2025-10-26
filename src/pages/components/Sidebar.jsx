@@ -15,7 +15,7 @@ export default function Sidebar() {
       name: "Consultancy Details",
       icon: <User size={18} />,
       subMenu: [
-        { name: "Add Consultancy", icon: <UserPlus size={18} />, path: "/consultancy" },
+        { name: "Add Consultancy", icon: <UserPlus size={18} />, path: "/add-new-consultancy" },
         { name: "All Consultancies", icon: <Users size={18} />, path: "/consultancy/all" },
         { name: "All Payment Details", icon: <IndianRupeeIcon size={18} />, path: "/consultancy/payments" },
       ],
@@ -175,20 +175,12 @@ export default function Sidebar() {
       </button>
 
       {/* --- Sidebar --- */}
-      <aside
-        className={`fixed md:static top-0 left-0 h-screen bg-[#1E293B] text-white flex flex-col justify-between transition-all duration-300 z-40 ${
-          isOpen ? "w-64" : "w-20"
-        } ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
-      >
+      <aside className={`fixed md:static top-0 left-0 h-screen bg-[#1E293B] text-white flex flex-col justify-between transition-all duration-300 z-40 ${ isOpen ? "w-64" : "w-20" } ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`} >
         {/* Header + Menu */}
         <div className="p-4 flex-1 overflow-y-auto flex flex-col justify-between">
           <div>
-            <h1
-              className={`text-xl font-bold text-yellow-400 mb-6 transition-opacity duration-300 ${
-                !isOpen && "opacity-0"
-              }`}
-            >
-              SSMS
+            <h1 className={`text-xl font-bold text-yellow-400 mb-6 transition-opacity duration-300 ${ !isOpen && "opacity-0" }`} >
+              Enrilo
             </h1>
 
             <ul className="space-y-3">{renderMenuItems()}</ul>
@@ -202,29 +194,20 @@ export default function Sidebar() {
 
         {/* Sidebar Toggle Button */}
         <div className="flex justify-center p-4 border-t border-gray-700">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-full bg-[#334155] hover:bg-[#475569] transition"
-          >
+          <button onClick={() => setIsOpen(!isOpen)} className="p-2 rounded-full bg-[#334155] hover:bg-[#475569] transition" >
             {isOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
           </button>
         </div>
 
         {/* Mobile Close Button */}
-        <button
-          className="md:hidden absolute top-4 right-4 p-2 rounded-md bg-[#334155] hover:bg-[#475569]"
-          onClick={() => setMobileOpen(false)}
-        >
+        <button className="md:hidden absolute top-4 right-4 p-2 rounded-md bg-[#334155] hover:bg-[#475569]" onClick={() => setMobileOpen(false)} >
           <X size={24} />
         </button>
       </aside>
 
       {/* --- Mobile Overlay --- */}
       {mobileOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
-          onClick={() => setMobileOpen(false)}
-        ></div>
+        <div className="fixed inset-0 bg-black/50 z-30 md:hidden" onClick={() => setMobileOpen(false)} ></div>
       )}
     </>
   );
