@@ -1,5 +1,5 @@
 // src/pages/ConsultancyForm.jsx
-export default function ConsultancyForm() {
+export default function AddNewConsultancy() {
   return (
     <div className="p-4">
       <div className="bg-white rounded-2xl shadow p-6 max-w-5xl mx-auto">
