@@ -32,7 +32,7 @@ const userSchema = Joi.object({
         pan_card_photo_url: Joi.string().required(),
         pan_card: Joi.string().required(),
     }).required(),
-    admin_of_branch: Joi.array().allow([]),
+    admin_of_branch: Joi.array().allow('', null),
     notes: Joi.string().allow(""),
 });
 
