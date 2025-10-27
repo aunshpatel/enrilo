@@ -5,6 +5,9 @@ import Header from "./pages/components/Header.jsx";
 import Footer from "./pages/components/Footer.jsx";
 import Sidebar from "./pages/components/Sidebar.jsx";
 import "./App.css";
+import MasterAdminLogin from "./pages/MasterAdminLogin.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
   return (
@@ -15,7 +18,10 @@ function App() {
           <Header />
           <main className="flex-1 overflow-y-auto p-6">
             <Routes>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/master-admin-login" element={<MasterAdminLogin/>}/>
               <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/add-new-consultancy" element={<AddNewConsultancy />} />
             </Routes>
           </main>
