@@ -8,6 +8,7 @@ import "./App.css";
 import MasterAdminLogin from "./pages/MasterAdminLogin.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Login from "./pages/Login.jsx";
+import AllConsultanciesPage from "./pages/AllConsultanciesPage.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<Login/>}/>
               <Route path="/master-admin-login" element={<MasterAdminLogin/>}/>
+              <Route path="/all-consultancies" element={<AllConsultanciesPage/>}/>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/add-new-consultancy" element={<AddNewConsultancy />} />
