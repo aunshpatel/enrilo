@@ -5,9 +5,10 @@ export default function Header() {
 
   // Dynamic title map
   const titleMap = {
+    "/": "Home Page",
     "/dashboard": "Dashboard",
     "/add-new-consultancy": "Add New Consultancy",
-    "/consultancy/all": "All Consultancies",
+    "/all-consultancies": "All Consultancies",
     "/consultancy/payments": "All Payment Details",
     "/superadmin/add": "Add Super Admin",
     "/superadmin/all": "All Super Admin",
@@ -21,7 +22,7 @@ export default function Header() {
   const currentTitle = titleMap[location.pathname] || "Enrilo Dashboard";
 
   return (
-    <header className="bg-white shadow p-4 flex items-center">
+    <header className="bg-white shadow p-4 flex flex-row justify-center">
       <h1 className="text-xl font-semibold text-gray-800">{currentTitle}</h1>
       {/* <div className="flex items-center gap-4">
         <button className="bg-[#2563EB] text-white px-3 py-1 rounded-md hover:bg-[#1D4ED8] transition">

@@ -16,7 +16,7 @@ export default function Sidebar() {
       icon: <User size={18} />,
       subMenu: [
         { name: "Add Consultancy", icon: <UserPlus size={18} />, path: "/add-new-consultancy" },
-        { name: "All Consultancies", icon: <Users size={18} />, path: "/consultancy/all" },
+        { name: "All Consultancies", icon: <Users size={18} />, path: "/all-consultancies" },
         { name: "All Payment Details", icon: <IndianRupeeIcon size={18} />, path: "/consultancy/payments" },
       ],
     },
@@ -80,14 +80,7 @@ export default function Sidebar() {
         <li key={idx}>
           {hasSubMenu ? (
             <>
-              <button
-                onClick={() => toggleSubMenu(item.name)}
-                className={`flex items-center justify-between w-full p-2 rounded-md transition-all duration-200 ${
-                  isSubActive
-                    ? "bg-[#475569] text-yellow-300 font-semibold"
-                    : "hover:bg-[#334155]"
-                }`}
-              >
+              <button onClick={() => toggleSubMenu(item.name)} className={`flex items-center justify-between w-full p-2 rounded-md transition-all duration-200 ${ isSubActive ? "bg-[#475569] text-yellow-300 font-semibold" : "hover:bg-[#334155]" }`} >
                 <div className="flex items-center space-x-3">
                   <span>{item.icon}</span>
                   {isOpen && <span className="text-sm font-medium">{item.name}</span>}
@@ -109,14 +102,7 @@ export default function Sidebar() {
                     const isActive = location.pathname === sub.path;
                     return (
                       <li key={subIdx}>
-                        <Link
-                          to={sub.path}
-                          className={`flex justify-between items-center text-sm rounded-md px-3 py-2 transition ${
-                            isActive
-                              ? "bg-[#475569] text-yellow-300 font-semibold"
-                              : "hover:bg-[#475569]"
-                          }`}
-                        >
+                        <Link to={sub.path} className={`flex justify-between items-center text-sm rounded-md px-3 py-2 transition ${ isActive ? "bg-[#475569] text-yellow-300 font-semibold" : "hover:bg-[#475569]" }`} >
                           <span>{sub.icon}</span>
                           <span>{sub.name}</span>
                         </Link>
@@ -127,14 +113,7 @@ export default function Sidebar() {
               )}
             </>
           ) : (
-            <Link
-              to={item.path}
-              className={`flex items-center space-x-3 p-2 rounded-md transition-all duration-200 ${
-                isMenuActive
-                  ? "bg-[#475569] text-yellow-300 font-semibold"
-                  : "hover:bg-[#334155]"
-              }`}
-            >
+            <Link to={item.path} className={`flex items-center space-x-3 p-2 rounded-md transition-all duration-200 ${ isMenuActive ? "bg-[#475569] text-yellow-300 font-semibold" : "hover:bg-[#334155]" }`} >
               <span>{item.icon}</span>
               {isOpen && <span className="text-sm">{item.name}</span>}
             </Link>
@@ -149,14 +128,7 @@ export default function Sidebar() {
       const isActive = location.pathname === item.path;
       return (
         <li key={idx}>
-          <Link
-            to={item.path}
-            className={`flex items-center space-x-3 p-2 rounded-md transition-all duration-200 ${
-              isActive
-                ? "bg-[#475569] text-yellow-300 font-semibold"
-                : "hover:bg-[#334155]"
-            }`}
-          >
+          <Link to={item.path} className={`flex items-center space-x-3 p-2 rounded-md transition-all duration-200 ${ isActive ? "bg-[#475569] text-yellow-300 font-semibold" : "hover:bg-[#334155]" }`} >
             <span>{item.icon}</span>
             {isOpen && <span className="text-sm">{item.name}</span>}
           </Link>
@@ -167,10 +139,7 @@ export default function Sidebar() {
   return (
     <>
       {/* --- Mobile Hamburger --- */}
-      <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-[#1E293B] text-white shadow"
-        onClick={() => setMobileOpen(true)}
-      >
+      <button className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-[#1E293B] text-white shadow" onClick={() => setMobileOpen(true)} >
         <Menu size={24} />
       </button>
 
