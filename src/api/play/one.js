@@ -1,68 +1,78 @@
 import connectDB from "../config/db.js";
-import User from "../models/User.js";
+import SuperAdmin from "../models/SuperAdmin.js";
 import bcrypt from "bcrypt";
-(async function play() {
-    try {
-        console.log('Function play one');
-        await connectDB();
-        const password = "MySecurePassword123";
-        const hashedPassword = await hashPassword(password);
 
-        const sampleUser = {
-            full_name: "Tabrez Shaikh",
-            email: "tbz@gmail.com",
-            phone_number: "8320336902",
-            country_code: "+91",
-            password: hashedPassword, // usually hashed in production
-            role: "counsellor",
-            position: "Senior Education Counsellor",
-            company_name: "Global Pathway Consultancy",
-            company_email: "info@globalpathway.com",
-            company_address: "Vadodara, India",
-            branch: "Vadodara HQ",
-            home_address: "123 MG Road, Vadodara",
-            date_of_birth: new Date("1990-07-15"),
-            gender: "Male",
-            emergency_contact: {
-                name: "Tabrez Shaikh",
-                relation: "Brother",
-                country_code: "+91",
-                phone_number: "8320336901",
-            },
-            documents: {
-                aadhar_card: {
-                    number: "1234-5678-9101",
-                    file: "https://example.com/uploads/aadhar_priya.pdf",
-                },
-                pan_card: {
-                    number: "ABCDE1234F",
-                    file: "https://example.com/uploads/pan_priya.pdf",
-                },
-                passport: {
-                    number: "N1234567",
-                    file: "https://example.com/uploads/passport_priya.pdf",
-                },
-            },
-            notes: "Excellent counsellor with strong student follow-up record.",
-        };
+(async function seedSuperAdmin() {
+  try {
+    console.log("🚀 Starting Super Admin seeding...");
 
-        console.log(sampleUser);
-        const user = new User(sampleUser);
-        await user.save();
+    // Connect to MongoDB
+    await connectDB();
 
-        console.log("🎉 User saved successfully!");
+    // Password setup
+    const plainPassword = "SuperSecureAdmin123!";
+    const hashedPassword = await hashPassword(plainPassword);
 
-        process.exit(0);
+    // Sample Super Admin data
+    const superAdminData = {
+      photo_url: "https://example.com/uploads/superadmin_photo.jpg",
+      full_name: "Ayaan Mehta",
+      country_code: "+91",
+      phone: "9876543210",
+      company_email: "ayaan.mehta@globalhq.com",
+      email: "ayaan.personal@gmail.com",
+      position: "Global Super Admin",
 
-    } catch (error) {
-        console.log('Error at play one');
-        console.log(error);
-        throw error;
-    }
-})()
+      street_1: "221B Baker Street",
+      street_2: "Near City Center",
+      city: "Mumbai",
+      state: "Maharashtra",
+      country: "India",
+      zipcode: "400001",
 
+      emergency_contact: {
+        name: "Karan Mehta",
+        relation: "Brother",
+        country_code: "+91",
+        phone: "9988776655",
+      },
+
+      documents: [
+        {
+          name: "Passport",
+          url: "https://example.com/uploads/passport_ayaan.pdf",
+        },
+        {
+          name: "ID Card",
+          url: "https://example.com/uploads/id_ayaan.pdf",
+        },
+      ],
+
+      role: "super_admin",
+      is_active: true,
+      notes: "Primary super admin responsible for global access.",
+      password: hashedPassword,
+    };
+
+    // Create and save Super Admin
+    const superAdmin = new SuperAdmin(superAdminData);
+    await superAdmin.save();
+
+    console.log("🎉 Super Admin saved successfully!");
+    console.log("✅ Login credentials:");
+    console.log(`   Email: ${superAdminData.company_email}`);
+    console.log(`   Password: ${plainPassword}`);
+
+    process.exit(0);
+  } catch (error) {
+    console.error("❌ Error seeding Super Admin:", error);
+    process.exit(1);
+  }
+})();
+
+// Utility: Hash Password
 const hashPassword = async (plainPassword) => {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(plainPassword, salt);
-    return hashedPassword;
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(plainPassword, salt);
+  return hashedPassword;
 };
